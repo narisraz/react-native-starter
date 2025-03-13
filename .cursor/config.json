@@ -1,0 +1,91 @@
+{
+  "prompts": [
+    {
+      "name": "Project Structure",
+      "description": "Ensure the project follows a modular and domain-driven structure.",
+      "rules": [
+        "Organize files by domain instead of type. Use 'src/modules/{domain}' instead of generic folders like 'components' and 'screens'.",
+        "Create separate directories for components, hooks, services, stores, navigation, and utils.",
+        "Each module should have its own 'components', 'services', and 'state' if needed."
+      ]
+    },
+    {
+      "name": "Component Rules",
+      "description": "Standardize the way React Native components are built and structured.",
+      "rules": [
+        "Use functional components exclusively.",
+        "Ensure components are small and reusable. A component should have a single responsibility.",
+        "Use PascalCase for component names (e.g., UserProfile.tsx).",
+        "Separate UI components from business logic by keeping UI in 'components' and logic in 'modules'."
+      ]
+    },
+    {
+      "name": "State Management",
+      "description": "Define best practices for managing state with Zustand, Recoil, or Redux.",
+      "rules": [
+        "Use Zustand or Recoil for lightweight state management. Only use Redux if necessary for global state.",
+        "State logic should not be inside UI components. Move state logic to 'stores' or domain modules.",
+        "All stores must be typed with TypeScript.",
+        "Avoid unnecessary re-renders by using 'useMemo', 'useCallback', and 'useRef' when needed."
+      ]
+    },
+    {
+      "name": "API and Services",
+      "description": "Enforce structured API calls and avoid redundant networking logic.",
+      "rules": [
+        "All API calls must be handled in 'services' directory.",
+        "Use Axios with interceptors for API calls.",
+        "Ensure responses are strongly typed using TypeScript interfaces.",
+        "Separate API call functions from UI components to maintain modularity."
+      ]
+    },
+    {
+      "name": "Navigation",
+      "description": "Ensure a well-structured navigation system using React Navigation.",
+      "rules": [
+        "Each domain should have its own stack navigator (e.g., 'modules/auth/navigation.ts').",
+        "Use a strongly-typed RootStackParamList to ensure type safety.",
+        "Global navigation should be configured in 'navigation/index.ts'."
+      ]
+    },
+    {
+      "name": "Code Quality",
+      "description": "Maintain high code quality with ESLint, Prettier, and TypeScript.",
+      "rules": [
+        "Ensure all files use TypeScript (.tsx for components, .ts for logic).",
+        "Use interfaces to type props and states.",
+        "Follow ESLint and Prettier rules to enforce consistent formatting.",
+        "Avoid inline styles; use styled-components or Tailwind CSS."
+      ]
+    },
+    {
+      "name": "Testing and Debugging",
+      "description": "Encourage testing and debugging best practices.",
+      "rules": [
+        "Write unit tests for components and services using Jest and React Testing Library.",
+        "Use Detox for end-to-end (E2E) testing.",
+        "Use Reactotron for debugging Redux/Zustand state and network requests.",
+        "Ensure all critical screens have error boundaries."
+      ]
+    },
+    {
+      "name": "Build and Deployment",
+      "description": "Automate the build and deployment process.",
+      "rules": [
+        "Use 'react-native-config' for managing environment variables securely.",
+        "Automate builds using Fastlane.",
+        "Set up CI/CD with GitHub Actions, Bitrise, or Codemagic.",
+        "Ensure Android and iOS builds are tested before release."
+      ]
+    },
+    {
+      "name": "Git Strategy",
+      "description": "Git commit strategy",
+      "rules": [
+        "Commits should contain gitmoji and a description of the changes.",
+        "Use the present tense in the commit message (e.g., 'Add new feature' instead of 'Added new feature').",
+        "Use the imperative mood in the commit message (e.g., 'Fix bug' instead of 'Fixed bug')."
+      ]
+    }
+  ]
+}
