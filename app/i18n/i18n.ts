@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import fr from './locales/fr.json';
 import en from './locales/en.json';
-import { getLocales } from 'react-native-localize';
+import * as RNLocalize from 'react-native-localize';
 
 type Resources = {
   fr: { translation: typeof fr };
@@ -19,8 +19,12 @@ const resources: Resources = {
 };
 
 const getDefaultLanguage = () => {
-  const deviceLanguage = getLocales()[0].languageCode;
-  return deviceLanguage in resources ? deviceLanguage : 'en';
+  try {
+    const deviceLanguage = RNLocalize.getLocales()[0].languageCode;
+    return deviceLanguage in resources ? deviceLanguage : 'en';
+  } catch (error) {
+    return 'en';
+  }
 };
 
 i18n
