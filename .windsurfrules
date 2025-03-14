@@ -1,0 +1,129 @@
+{
+  "rules": [
+    {
+      "name": "Enforce Folder Structure",
+      "description": "Ensure proper DDD-based folder structure.",
+      "type": "directory_structure",
+      "patterns": [
+        {
+          "path": "src/app/**",
+          "description": "Top-level application layer. Contains navigation, providers, and high-level state management.",
+          "required": true
+        },
+        {
+          "path": "src/features/**",
+          "description": "Feature-based structure. Each feature has its own components, hooks, services, and stores.",
+          "required": true
+        },
+        {
+          "path": "src/shared/ui/**",
+          "description": "Reusable UI components (buttons, modals, etc.).",
+          "required": true
+        },
+        {
+          "path": "src/shared/lib/**",
+          "description": "Shared utilities and helper functions.",
+          "required": true
+        },
+        {
+          "path": "src/shared/api/**",
+          "description": "API client and network requests.",
+          "required": true
+        },
+        {
+          "path": "src/shared/domain/**",
+          "description": "Domain entities, business logic, and domain-specific rules.",
+          "required": true
+        },
+        {
+          "path": "src/shared/infrastructure/**",
+          "description": "Infrastructure layer for external services and database interactions.",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Enforce Component Naming",
+      "description": "Ensure all components follow PascalCase naming convention.",
+      "type": "naming_convention",
+      "pattern": "src/(features|shared/ui)/**/([A-Z][a-zA-Z]+).tsx",
+      "message": "Component names must be in PascalCase."
+    },
+    {
+      "name": "Disallow Unused Imports",
+      "description": "Prevent unused imports from cluttering files.",
+      "type": "linting",
+      "rule": "no-unused-imports",
+      "severity": "error"
+    },
+    {
+      "name": "Require Explicit Hook Dependencies",
+      "description": "Ensure useEffect and useCallback have explicit dependencies.",
+      "type": "linting",
+      "rule": "react-hooks/exhaustive-deps",
+      "severity": "error"
+    },
+    {
+      "name": "Disallow Inline Styles",
+      "description": "Encourage usage of StyleSheet for better performance.",
+      "type": "linting",
+      "rule": "react-native/no-inline-styles",
+      "severity": "warning"
+    },
+    {
+      "name": "Restrict API Calls in Components",
+      "description": "Ensure API calls are made in services, not directly in components.",
+      "type": "custom_check",
+      "pattern": "src/(features|shared/ui)/**.tsx",
+      "forbidden_patterns": [
+        "fetch\\(",
+        "axios\\.get\\(",
+        "axios\\.post\\("
+      ],
+      "message": "API calls should be made in src/shared/api, not inside components."
+    },
+    {
+      "name": "Ensure Proper State Management",
+      "description": "Encourage Zustand or Redux usage for state management.",
+      "type": "custom_check",
+      "pattern": "src/features/**.tsx",
+      "allowed_patterns": [
+        "useStore\\(",
+        "useSelector\\(",
+        "useDispatch\\("
+      ],
+      "message": "State management should be handled via Zustand or Redux."
+    },
+    {
+      "name": "Performance Optimization - Memoization",
+      "description": "Ensure useMemo or useCallback is used when necessary.",
+      "type": "custom_check",
+      "pattern": "src/features/**.tsx",
+      "forbidden_patterns": [
+        "const handle[A-Z][a-zA-Z]* = \\(.*\\) => {"
+      ],
+      "message": "Consider wrapping handlers with useCallback for performance optimization."
+    },
+    {
+      "name": "Ensure Clean Architecture Layers",
+      "description": "Prevent cross-layer dependencies that violate Clean Architecture.",
+      "type": "custom_check",
+      "pattern": "src/**",
+      "forbidden_patterns": [
+        "import .* from 'src/shared/infrastructure/.*' in src/shared/domain/.*",
+        "import .* from 'src/features/.*' in src/shared/domain/.*"
+      ],
+      "message": "Domain layer should not depend on infrastructure or features."
+    },
+    {
+      "name": "Use Dependency Injection for Services",
+      "description": "Ensure that services are injected via constructors instead of direct imports.",
+      "type": "custom_check",
+      "pattern": "src/shared/infrastructure/**.ts",
+      "forbidden_patterns": [
+        "import .* from 'src/shared/infrastructure/.*';"
+      ],
+      "message": "Use dependency injection instead of direct imports in the infrastructure layer."
+    }
+  ]
+}
