@@ -10,9 +10,79 @@ import shared from '@/features/shared/infrastructure/i18n';
  * Type-safe resources definition following DDD principles.
  * Each feature's translations are isolated in their own namespace.
  */
+type TranslationResource = {
+  auth: {
+    login: {
+      title: string;
+      emailPlaceholder: string;
+      passwordPlaceholder: string;
+      submitButton: string;
+      forgotPassword: string;
+      noAccount: string;
+      signUp: string;
+      errors: {
+        invalidEmail: string;
+        invalidPassword: string;
+        invalidCredentials: string;
+      };
+    };
+    register: {
+      title: string;
+      emailPlaceholder: string;
+      passwordPlaceholder: string;
+      displayNamePlaceholder: string;
+      submitButton: string;
+      haveAccount: string;
+      signIn: string;
+      errors: {
+        invalidEmail: string;
+        invalidPassword: string;
+        invalidDisplayName: string;
+        emailInUse: string;
+      };
+    };
+  };
+  shared: {
+    common: {
+      loading: string;
+      error: string;
+      retry: string;
+      cancel: string;
+      save: string;
+      delete: string;
+      edit: string;
+      close: string;
+      confirm: string;
+      back: string;
+      next: string;
+      done: string;
+    };
+    validation: {
+      required: string;
+      email: string;
+      minLength: string;
+      maxLength: string;
+      passwordMatch: string;
+    };
+    errors: {
+      network: string;
+      server: string;
+      unauthorized: string;
+      forbidden: string;
+      notFound: string;
+    };
+    notifications: {
+      success: string;
+      error: string;
+      info: string;
+      warning: string;
+    };
+  };
+};
+
 type Resources = {
-  fr: { translation: typeof auth.fr & typeof shared.fr };
-  en: { translation: typeof auth.en & typeof shared.en };
+  fr: { translation: TranslationResource };
+  en: { translation: TranslationResource };
 };
 
 /**
@@ -22,14 +92,14 @@ type Resources = {
 const resources: Resources = {
   fr: {
     translation: {
-      ...auth.fr,
-      ...shared.fr,
+      auth: auth.fr,
+      shared: shared.fr,
     },
   },
   en: {
     translation: {
-      ...auth.en,
-      ...shared.en,
+      auth: auth.en,
+      shared: shared.en,
     },
   },
 };
@@ -64,6 +134,8 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    defaultNS: 'translation',
+    ns: ['translation'],
   });
 
 export default i18n;

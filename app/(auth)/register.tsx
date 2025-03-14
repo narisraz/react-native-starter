@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Box, Button, FormControl, Heading, Input, VStack, useToast } from 'native-base';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/features/auth/presentation/providers/AuthProvider';
+import { useAuthPresenter } from '@/features/auth/presentation/hooks/useAuthPresenter';
 
 export default function Register() {
   const { t } = useTranslation();
@@ -10,15 +10,15 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { register } = useAuth();
+  const { handleSignUp } = useAuthPresenter();
   const router = useRouter();
   const toast = useToast();
 
   const handleRegister = useCallback(async () => {
     if (!email || !password || !displayName) {
       toast.show({
-        title: t('common.error'),
-        description: t('validation.required'),
+        title: t('shared.common.error'),
+        description: t('shared.validation.required'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -28,12 +28,12 @@ export default function Register() {
 
     try {
       setIsLoading(true);
-      await register({ email, password, displayName });
+      await handleSignUp({ email, password, displayName });
       router.replace('/(dashboard)');
     } catch (error) {
       toast.show({
-        title: t('common.error'),
-        description: error instanceof Error ? error.message : t('register.errors.emailInUse'),
+        title: t('shared.common.error'),
+        description: error instanceof Error ? error.message : t('auth.register.errors.emailInUse'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -41,7 +41,7 @@ export default function Register() {
     } finally {
       setIsLoading(false);
     }
-  }, [email, password, displayName, register, router, toast, t]);
+  }, [email, password, displayName, handleSignUp, router, toast, t]);
 
   const handleLogin = useCallback(() => {
     router.push('/login');
@@ -50,54 +50,54 @@ export default function Register() {
   return (
     <Box flex={1} p={4} bg="white" justifyContent="center">
       <VStack space={4} alignItems="center">
-        <Heading size="lg">{t('register.title')}</Heading>
+        <Heading size="lg">{t('auth.register.title')}</Heading>
         <FormControl isRequired>
-          <FormControl.Label>{t('register.displayNamePlaceholder')}</FormControl.Label>
+          <FormControl.Label>{t('auth.register.displayNamePlaceholder')}</FormControl.Label>
           <Input
             value={displayName}
             onChangeText={setDisplayName}
             autoCapitalize="words"
-            placeholder={t('register.displayNamePlaceholder')}
+            placeholder={t('auth.register.displayNamePlaceholder')}
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>{t('register.emailPlaceholder')}</FormControl.Label>
+          <FormControl.Label>{t('auth.register.emailPlaceholder')}</FormControl.Label>
           <Input
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
             autoComplete="email"
-            placeholder={t('register.emailPlaceholder')}
+            placeholder={t('auth.register.emailPlaceholder')}
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>{t('register.passwordPlaceholder')}</FormControl.Label>
+          <FormControl.Label>{t('auth.register.passwordPlaceholder')}</FormControl.Label>
           <Input
             value={password}
             onChangeText={setPassword}
             type="password"
             autoCapitalize="none"
-            placeholder={t('register.passwordPlaceholder')}
+            placeholder={t('auth.register.passwordPlaceholder')}
           />
           <FormControl.HelperText>
-            {t('validation.minLength', { count: 6 })}
+            {t('shared.validation.minLength', { count: 6 })}
           </FormControl.HelperText>
         </FormControl>
         <Button
           w="full"
           onPress={handleRegister}
           isLoading={isLoading}
-          isLoadingText={t('common.loading')}
+          isLoadingText={t('shared.common.loading')}
         >
-          {t('register.submitButton')}
+          {t('auth.register.submitButton')}
         </Button>
         <Button
           w="full"
           variant="ghost"
           onPress={handleLogin}
         >
-          {t('register.haveAccount')} {t('register.signIn')}
+          {t('auth.register.haveAccount')} {t('auth.register.signIn')}
         </Button>
       </VStack>
     </Box>
