@@ -36,7 +36,7 @@
       "name": "Enforce Component Naming",
       "description": "Ensure all components follow PascalCase naming convention.",
       "type": "naming_convention",
-      "pattern": "src/(features|shared/ui)/**/([A-Z][a-zA-Z]+).tsx",
+      "pattern": "features/(features|shared/ui)/**/([A-Z][a-zA-Z]+).tsx",
       "message": "Component names must be in PascalCase."
     },
     {
@@ -64,7 +64,7 @@
       "name": "Restrict API Calls in Components",
       "description": "Ensure API calls are made in services, not directly in components.",
       "type": "custom_check",
-      "pattern": "src/(features|shared/ui)/**.tsx",
+      "pattern": "features/**.tsx",
       "forbidden_patterns": [
         "fetch\\(",
         "axios\\.get\\(",
@@ -76,7 +76,7 @@
       "name": "Ensure Proper State Management",
       "description": "Encourage Zustand or Redux usage for state management.",
       "type": "custom_check",
-      "pattern": "src/features/**.tsx",
+      "pattern": "features/**.tsx",
       "allowed_patterns": [
         "useStore\\(",
         "useSelector\\(",
@@ -88,15 +88,42 @@
       "name": "Performance Optimization - Memoization",
       "description": "Ensure useMemo or useCallback is used when necessary.",
       "type": "custom_check",
-      "pattern": "src/features/**.tsx",
+      "pattern": "features/**.tsx",
       "forbidden_patterns": [
         "const handle[A-Z][a-zA-Z]* = \\(.*\\) => {"
       ],
       "message": "Consider wrapping handlers with useCallback for performance optimization."
     },
     {
-      "name": "Translation",
-      "description": "Ensure all text is translated."
+      "name": "Translation Usage",
+      "description": "Ensures all text uses translations.",
+      "type": "custom_check",
+      "pattern": "features/**.tsx",
+      "forbidden_patterns": [
+        "['\"].+['\"]"
+      ],
+      "message": "All user-facing text should be wrapped with a translation function (e.g., t('key'))."
+    },
+    {
+      "name": "Domain Layer Purity",
+      "description": "Prevents external dependencies inside the domain layer.",
+      "type": "custom_check",
+      "pattern": "features/**/domain/**.ts",
+      "forbidden_patterns": [
+        "import .* from 'react'",
+        "import .* from 'axios'",
+        "import .* from 'react-native'"
+      ],
+      "message": "Domain layer should not depend on external libraries."
+    },
+    {
+      "name": "Presenter Pattern",
+      "description": "Ensures consistent presenter hook implementation.",
+      "type": "custom_check",
+      "allowed_patterns": [
+        "export function use.+Presenter"
+      ],
+      "message": "Presenter hooks should be used for UI-related logic abstraction."
     }
   ]
 }
