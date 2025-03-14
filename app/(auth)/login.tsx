@@ -3,6 +3,7 @@ import { Box, Button, FormControl, Heading, Input, VStack, useToast } from 'nati
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useAuthPresenter } from '@/features/auth/presentation/hooks/useAuthPresenter';
+import { useAuthProtection } from '@/features/auth/presentation/hooks/useAuthProtection';
 
 export default function Login() {
   const { t } = useTranslation();
@@ -10,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { handleSignIn } = useAuthPresenter();
+  
+  useAuthProtection();
   const router = useRouter();
   const toast = useToast();
 
