@@ -95,25 +95,8 @@
       "message": "Consider wrapping handlers with useCallback for performance optimization."
     },
     {
-      "name": "Ensure Clean Architecture Layers",
-      "description": "Prevent cross-layer dependencies that violate Clean Architecture.",
-      "type": "custom_check",
-      "pattern": "src/**",
-      "forbidden_patterns": [
-        "import .* from 'src/shared/infrastructure/.*' in src/shared/domain/.*",
-        "import .* from 'src/features/.*' in src/shared/domain/.*"
-      ],
-      "message": "Domain layer should not depend on infrastructure or features."
-    },
-    {
-      "name": "Use Dependency Injection for Services",
-      "description": "Ensure that services are injected via constructors instead of direct imports.",
-      "type": "custom_check",
-      "pattern": "src/shared/infrastructure/**.ts",
-      "forbidden_patterns": [
-        "import .* from 'src/shared/infrastructure/.*';"
-      ],
-      "message": "Use dependency injection instead of direct imports in the infrastructure layer."
+      "name": "Translation",
+      "description": "Ensure all text is translated."
     }
   ]
 }

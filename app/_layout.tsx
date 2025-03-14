@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import './i18n/i18n';
+import '@/features/shared/infrastructure/services/i18n/i18n';
 
 import { ThemeProvider } from '@/features/shared/presentation/providers/ThemeProvider';
 import { AuthProvider } from '@/features/auth/presentation/providers/AuthProvider';

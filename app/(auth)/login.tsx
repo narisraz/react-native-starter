@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Button, FormControl, Heading, Input, VStack, useToast } from 'native-base';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/presentation/providers/AuthProvider';
 
 export default function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -14,8 +16,8 @@ export default function Login() {
   const handleLogin = useCallback(async () => {
     if (!email || !password) {
       toast.show({
-        title: 'Error',
-        description: 'Please enter your email and password',
+        title: t('common.error'),
+        description: t('validation.required'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -29,8 +31,8 @@ export default function Login() {
       router.replace('/(dashboard)');
     } catch (error) {
       toast.show({
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to login',
+        title: t('common.error'),
+        description: error instanceof Error ? error.message : t('login.errors.invalidCredentials'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -38,7 +40,7 @@ export default function Login() {
     } finally {
       setIsLoading(false);
     }
-  }, [email, password, login, router, toast]);
+  }, [email, password, login, router, toast, t]);
 
   const handleRegister = useCallback(() => {
     router.push('/register');
@@ -47,42 +49,42 @@ export default function Login() {
   return (
     <Box flex={1} p={4} bg="white" justifyContent="center">
       <VStack space={4} alignItems="center">
-        <Heading size="lg">Welcome Back</Heading>
+        <Heading size="lg">{t('login.title')}</Heading>
         <FormControl isRequired>
-          <FormControl.Label>Email</FormControl.Label>
+          <FormControl.Label>{t('login.emailPlaceholder')}</FormControl.Label>
           <Input
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
             autoComplete="email"
-            placeholder="Enter your email"
+            placeholder={t('login.emailPlaceholder')}
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>Password</FormControl.Label>
+          <FormControl.Label>{t('login.passwordPlaceholder')}</FormControl.Label>
           <Input
             value={password}
             onChangeText={setPassword}
             type="password"
             autoCapitalize="none"
-            placeholder="Enter your password"
+            placeholder={t('login.passwordPlaceholder')}
           />
         </FormControl>
         <Button
           w="full"
           onPress={handleLogin}
           isLoading={isLoading}
-          isLoadingText="Logging in..."
+          isLoadingText={t('common.loading')}
         >
-          Login
+          {t('login.submitButton')}
         </Button>
         <Button
           w="full"
           variant="ghost"
           onPress={handleRegister}
         >
-          Create Account
+          {t('login.signUp')}
         </Button>
       </VStack>
     </Box>

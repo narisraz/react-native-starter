@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Button, FormControl, Heading, Input, VStack, useToast } from 'native-base';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/presentation/providers/AuthProvider';
 
 export default function Register() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -15,8 +17,8 @@ export default function Register() {
   const handleRegister = useCallback(async () => {
     if (!email || !password || !displayName) {
       toast.show({
-        title: 'Error',
-        description: 'Please fill in all fields',
+        title: t('common.error'),
+        description: t('validation.required'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -30,8 +32,8 @@ export default function Register() {
       router.replace('/(dashboard)');
     } catch (error) {
       toast.show({
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to register',
+        title: t('common.error'),
+        description: error instanceof Error ? error.message : t('register.errors.emailInUse'),
         placement: 'top',
         variant: 'solid',
         backgroundColor: 'error.500'
@@ -39,7 +41,7 @@ export default function Register() {
     } finally {
       setIsLoading(false);
     }
-  }, [email, password, displayName, register, router, toast]);
+  }, [email, password, displayName, register, router, toast, t]);
 
   const handleLogin = useCallback(() => {
     router.push('/login');
@@ -48,54 +50,54 @@ export default function Register() {
   return (
     <Box flex={1} p={4} bg="white" justifyContent="center">
       <VStack space={4} alignItems="center">
-        <Heading size="lg">Create Account</Heading>
+        <Heading size="lg">{t('register.title')}</Heading>
         <FormControl isRequired>
-          <FormControl.Label>Display Name</FormControl.Label>
+          <FormControl.Label>{t('register.displayNamePlaceholder')}</FormControl.Label>
           <Input
             value={displayName}
             onChangeText={setDisplayName}
             autoCapitalize="words"
-            placeholder="Enter your name"
+            placeholder={t('register.displayNamePlaceholder')}
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>Email</FormControl.Label>
+          <FormControl.Label>{t('register.emailPlaceholder')}</FormControl.Label>
           <Input
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
             autoComplete="email"
-            placeholder="Enter your email"
+            placeholder={t('register.emailPlaceholder')}
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>Password</FormControl.Label>
+          <FormControl.Label>{t('register.passwordPlaceholder')}</FormControl.Label>
           <Input
             value={password}
             onChangeText={setPassword}
             type="password"
             autoCapitalize="none"
-            placeholder="Choose a password"
+            placeholder={t('register.passwordPlaceholder')}
           />
           <FormControl.HelperText>
-            Must be at least 6 characters
+            {t('validation.minLength', { count: 6 })}
           </FormControl.HelperText>
         </FormControl>
         <Button
           w="full"
           onPress={handleRegister}
           isLoading={isLoading}
-          isLoadingText="Creating account..."
+          isLoadingText={t('common.loading')}
         >
-          Register
+          {t('register.submitButton')}
         </Button>
         <Button
           w="full"
           variant="ghost"
           onPress={handleLogin}
         >
-          Already have an account? Login
+          {t('register.haveAccount')} {t('register.signIn')}
         </Button>
       </VStack>
     </Box>

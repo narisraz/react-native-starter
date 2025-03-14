@@ -1,0 +1,76 @@
+const shared = {
+  en: {
+    common: {
+      loading: 'Loading...',
+      error: 'An error occurred',
+      retry: 'Retry',
+      cancel: 'Cancel',
+      save: 'Save',
+      delete: 'Delete',
+      edit: 'Edit',
+      close: 'Close',
+      confirm: 'Confirm',
+      back: 'Back',
+      next: 'Next',
+      done: 'Done',
+    },
+    validation: {
+      required: 'This field is required',
+      email: 'Please enter a valid email',
+      minLength: 'Must be at least {{count}} characters',
+      maxLength: 'Must be less than {{count}} characters',
+      passwordMatch: 'Passwords must match',
+    },
+    errors: {
+      network: 'Network error. Please check your connection.',
+      server: 'Server error. Please try again later.',
+      unauthorized: 'Please login to continue',
+      forbidden: 'You don\'t have permission to access this',
+      notFound: 'Resource not found',
+    },
+    notifications: {
+      success: 'Success',
+      error: 'Error',
+      info: 'Information',
+      warning: 'Warning',
+    },
+  },
+  fr: {
+    common: {
+      loading: 'Chargement...',
+      error: 'Une erreur est survenue',
+      retry: 'Réessayer',
+      cancel: 'Annuler',
+      save: 'Enregistrer',
+      delete: 'Supprimer',
+      edit: 'Modifier',
+      close: 'Fermer',
+      confirm: 'Confirmer',
+      back: 'Retour',
+      next: 'Suivant',
+      done: 'Terminé',
+    },
+    validation: {
+      required: 'Ce champ est requis',
+      email: 'Veuillez entrer un email valide',
+      minLength: 'Doit contenir au moins {{count}} caractères',
+      maxLength: 'Doit contenir moins de {{count}} caractères',
+      passwordMatch: 'Les mots de passe doivent correspondre',
+    },
+    errors: {
+      network: 'Erreur réseau. Veuillez vérifier votre connexion.',
+      server: 'Erreur serveur. Veuillez réessayer plus tard.',
+      unauthorized: 'Veuillez vous connecter pour continuer',
+      forbidden: 'Vous n\'avez pas la permission d\'accéder à cette ressource',
+      notFound: 'Ressource non trouvée',
+    },
+    notifications: {
+      success: 'Succès',
+      error: 'Erreur',
+      info: 'Information',
+      warning: 'Attention',
+    },
+  },
+} as const;
+
+export default shared;
