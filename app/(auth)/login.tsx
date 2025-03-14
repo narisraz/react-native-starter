@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Button, FormControl, Heading, Input, VStack, useToast } from 'native-base';
 import { useRouter } from 'expo-router';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/features/auth/presentation/providers/AuthProvider';
 
 export default function Login() {
   const [email, setEmail] = useState('');

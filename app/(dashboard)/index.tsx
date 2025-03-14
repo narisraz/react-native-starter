@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, VStack } from 'native-base';
-import { BaseCard } from '@/shared/ui/components/Card/BaseCard';
+import { BaseCard } from '@/features/shared/presentation/components/Card/BaseCard';
 
 export default function DashboardScreen() {
   return (

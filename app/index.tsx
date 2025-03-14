@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, VStack, ScrollView, Heading, useTheme } from 'native-base';
-import { BaseCard } from '@/shared/ui/components/Card/BaseCard';
+import { BaseCard } from '@/features/shared/presentation/components/Card/BaseCard';
 
 export default function HomeScreen() {
   const { colors } = useTheme();

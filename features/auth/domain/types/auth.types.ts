@@ -1,8 +1,8 @@
-export interface AuthUser {
-  id: string;
-  email: string | undefined;
-  displayName?: string;
-  photoURL?: string;
+import { User } from '@/features/shared/domain/entities/User';
+
+export interface AuthUser extends User {
+  emailVerified: boolean;
+  authToken?: string;
 }
 
 export interface AuthCredentials {
@@ -13,13 +13,13 @@ export interface AuthCredentials {
 
 export interface AuthResponse {
   user: AuthUser;
-  token?: string;
+  token: string;
 }
 
 export interface IAuthService {
   login(credentials: AuthCredentials): Promise<AuthResponse>;
   register(credentials: AuthCredentials): Promise<AuthResponse>;
   logout(): Promise<void>;
-  getCurrentUser(): Promise<AuthUser | null>;
   resetPassword(email: string): Promise<void>;
+  getCurrentUser(): Promise<AuthUser | null>;
 }

@@ -4,18 +4,19 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./app/*"
-      ]
+      "@/*": ["./app/*"],
+      "@/features/*": ["./features/*"]
     },
     "typeRoots": [
       "./node_modules/@types",
-      "./app/shared/infrastructure/types"
+      "./features/shared/infrastructure/types"
     ]
   },
   "include": [
     "app/**/*.ts",
     "app/**/*.tsx",
-    "app/shared/infrastructure/types/*.d.ts"
+    "features/**/*.ts",
+    "features/**/*.tsx",
+    "features/shared/infrastructure/types/*.d.ts"
   ]
 }

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AuthUser, IAuthService } from '@/shared/domain/auth/types';
-import { createAuthProvider } from '@/shared/infrastructure/auth/createAuthProvider';
+import { AuthUser, IAuthService } from '@/features/auth/domain/types/auth.types';
+import { HttpClient } from '@/features/shared/infrastructure/services/api/HttpClient';
+import { AuthService } from '@/features/auth/infrastructure/services/AuthService';
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -13,7 +14,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const authService = createAuthProvider();
+// Initialize services following dependency injection pattern
+const httpClient = new HttpClient({ baseURL: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000' });
+const authService = new AuthService(httpClient);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);

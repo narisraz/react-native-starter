@@ -1,7 +1,8 @@
 import React from 'react';
 import { Stack, useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { Typography, Button } from '@/shared/ui';
+import { Typography } from '@/features/shared/presentation/components/Typography/Typography';
+import { Button } from '@/features/shared/presentation/components/Button/Button';
 
 export default function NotFoundScreen() {
   const router = useRouter();
