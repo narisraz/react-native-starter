@@ -1,15 +1,16 @@
 import React from 'react';
-import { Box, VStack, ScrollView, Heading, useTheme } from 'native-base';
+import { Box, VStack, ScrollView, Heading } from 'native-base';
 import { BaseCard } from '@/features/shared/presentation/components/Card/BaseCard';
+import { useThemeStore } from '@/features/shared/presentation/store/useThemeStore';
 
 export default function HomeScreen() {
-  const { colors } = useTheme();
+  const { theme } = useThemeStore();
 
   return (
     <Box flex={1} bg="gray.50" safeArea>
       <ScrollView>
         <VStack space={4} p={4}>
-          <Heading size="xl" color={colors.primary[600]}>
+          <Heading size="xl" color={theme.colors.primary[600]}>
             Welcome Back
           </Heading>
 

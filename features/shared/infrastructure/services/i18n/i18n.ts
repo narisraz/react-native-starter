@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import * as RNLocalize from 'react-native-localize';
+import LocalizationService from '../localization/LocalizationService';
 
 // Import translations for each feature following DDD principles
 import auth from '@/features/auth/infrastructure/i18n';
@@ -110,7 +110,8 @@ const resources: Resources = {
  */
 const getDefaultLanguage = () => {
   try {
-    const deviceLanguage = RNLocalize.getLocales()[0].languageCode;
+    const localizationService = LocalizationService.getInstance();
+    const deviceLanguage = localizationService.getCurrentLocale().languageCode;
     return deviceLanguage in resources ? deviceLanguage : 'en';
   } catch (error) {
     return 'en';
