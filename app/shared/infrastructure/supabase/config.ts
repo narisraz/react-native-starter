@@ -1,22 +1,33 @@
 import { createClient } from '@supabase/supabase-js';
-import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-url-polyfill/auto';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@env';
 
-const getSupabaseConfig = () => {
-  const supabaseUrl = Constants.expoConfig?.extra?.supabaseUrl;
-  const supabaseAnonKey = Constants.expoConfig?.extra?.supabaseAnonKey;
+// Infrastructure layer configuration following DDD principles
+interface SupabaseConfig {
+  supabaseUrl: string;
+  supabaseAnonKey: string;
+}
 
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Missing Supabase configuration. Please check your app.config.js and .env file');
+const getSupabaseConfig = (): SupabaseConfig => {
+  if (!SUPABASE_URL || typeof SUPABASE_URL !== 'string') {
+    throw new Error('Missing or invalid SUPABASE_URL in environment configuration');
   }
 
-  return { supabaseUrl, supabaseAnonKey };
+  if (!SUPABASE_ANON_KEY || typeof SUPABASE_ANON_KEY !== 'string') {
+    throw new Error('Missing or invalid SUPABASE_ANON_KEY in environment configuration');
+  }
+
+  return {
+    supabaseUrl: SUPABASE_URL,
+    supabaseAnonKey: SUPABASE_ANON_KEY
+  };
 };
 
-const { supabaseUrl, supabaseAnonKey } = getSupabaseConfig();
+const config = getSupabaseConfig();
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+// Create and export Supabase client with proper configuration
+export const supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
   auth: {
     storage: AsyncStorage,
     autoRefreshToken: true,
@@ -24,3 +35,4 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: false
   }
 });
+

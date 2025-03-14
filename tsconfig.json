@@ -7,10 +7,15 @@
       "@/*": [
         "./app/*"
       ]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./app/shared/infrastructure/types"
+    ]
   },
   "include": [
     "app/**/*.ts",
-    "app/**/*.tsx"
+    "app/**/*.tsx",
+    "app/shared/infrastructure/types/*.d.ts"
   ]
 }
