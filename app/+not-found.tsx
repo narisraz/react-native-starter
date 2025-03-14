@@ -1,9 +1,7 @@
 import React from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { StyleSheet, Pressable } from 'react-native';
-
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { StyleSheet, View } from 'react-native';
+import { Typography, Button } from '@/shared/ui';
 
 export default function NotFoundScreen() {
   const router = useRouter();
@@ -11,12 +9,15 @@ export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type="title">This screen doesn't exist.</ThemedText>
-        <Pressable onPress={() => router.replace('/(tabs)' as any)} style={styles.link}>
-          <ThemedText type="link">Go to home screen!</ThemedText>
-        </Pressable>
-      </ThemedView>
+      <View style={styles.container}>
+        <Typography variant="h2">This screen doesn't exist.</Typography>
+        <Button 
+          onPress={() => router.replace('/(dashboard)')} 
+          variant="link"
+        >
+          Go to home screen!
+        </Button>
+      </View>
     </>
   );
 }
@@ -27,9 +28,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
   },
 });

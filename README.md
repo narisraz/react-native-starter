@@ -7,7 +7,7 @@ A production-ready React Native starter template built with Expo and Domain-Driv
 - 📱 Built with [Expo](https://expo.dev)
 - 🏗️ Domain-Driven Design (DDD) architecture
 - 🔄 State management with Zustand/Redux
-- 🎨 Strict styling guidelines with StyleSheet
+- 🎨 NativeBase UI components and theming
 - ✨ Performance optimizations out of the box
 - 🧪 Clean Architecture principles
 - 💉 Dependency Injection pattern
@@ -16,15 +16,24 @@ A production-ready React Native starter template built with Expo and Domain-Driv
 ## Project Structure
 
 ```
-src/
-├── app/           # Application layer (navigation, providers, state)
-├── features/      # Feature-based modules
-└── shared/
-    ├── ui/        # Reusable UI components
-    ├── lib/       # Utilities and helpers
-    ├── api/       # API client and requests
-    ├── domain/    # Business logic and entities
-    └── infrastructure/  # External services integration
+app/
+├── _layout.tsx           # Root layout
+├── index.tsx             # Root component
+├── providers/            # Application providers
+├── (auth)/               # Auth feature routes
+│   ├── login.tsx        # Login screen
+│   └── register.tsx     # Register screen
+├── (dashboard)/          # Dashboard feature routes
+│   ├── _layout.tsx      # Dashboard layout
+│   └── index.tsx       # Dashboard home
+└── shared/               # Shared modules
+    ├── ui/               # Reusable UI components
+    ├── lib/              # Utilities and helpers
+    │   └── hooks/        # Shared hooks
+    ├── api/              # API client and requests
+    ├── domain/           # Business logic and entities
+    └── infrastructure/   # External services
+        └── theme/        # Theme configuration
 ```
 
 ## Getting Started
