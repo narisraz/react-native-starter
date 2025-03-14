@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AuthUser, IAuthService } from '@/features/auth/domain/types/auth.types';
-import { HttpClient } from '@/features/shared/infrastructure/services/api/HttpClient';
+import { AuthUser, IAuthService, AuthResponse } from '@/features/auth/domain/types/auth.types';
 import { AuthService } from '@/features/auth/infrastructure/services/AuthService';
+import { supabase } from '@/features/shared/infrastructure/services/supabase/SupabaseClient';
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -10,13 +10,13 @@ interface AuthContextType {
   register: IAuthService['register'];
   logout: IAuthService['logout'];
   resetPassword: IAuthService['resetPassword'];
+  updateUser: IAuthService['updateUser'];
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Initialize services following dependency injection pattern
-const httpClient = new HttpClient({ baseURL: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000' });
-const authService = new AuthService(httpClient);
+// Initialize service following DDD principles
+const authService = new AuthService();
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -34,28 +34,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+          const currentUser = await authService.getCurrentUser();
+          setUser(currentUser);
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+        }
+      }
+    );
+
     initAuth();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const login: IAuthService['login'] = async (credentials) => {
+  const login = async (credentials: Parameters<IAuthService['login']>[0]): Promise<AuthResponse> => {
     const response = await authService.login(credentials);
     setUser(response.user);
     return response;
   };
 
-  const register: IAuthService['register'] = async (credentials) => {
+  const register = async (credentials: Parameters<IAuthService['register']>[0]): Promise<AuthResponse> => {
     const response = await authService.register(credentials);
     setUser(response.user);
     return response;
   };
 
-  const logout: IAuthService['logout'] = async () => {
+  const logout = async (): Promise<void> => {
     await authService.logout();
     setUser(null);
   };
 
-  const resetPassword: IAuthService['resetPassword'] = async (email) => {
+  const resetPassword = async (email: string): Promise<void> => {
     await authService.resetPassword(email);
+  };
+
+  const updateUser = async (updates: Parameters<IAuthService['updateUser']>[0]): Promise<AuthUser> => {
+    const updatedUser = await authService.updateUser(updates);
+    setUser(updatedUser);
+    return updatedUser;
   };
 
   return (
@@ -67,6 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         resetPassword,
+        updateUser,
       }}
     >
       {children}
