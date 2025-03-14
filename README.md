@@ -26,14 +26,37 @@ app/
 ├── (dashboard)/          # Dashboard feature routes
 │   ├── _layout.tsx      # Dashboard layout
 │   └── index.tsx       # Dashboard home
-└── shared/               # Shared modules
-    ├── ui/               # Reusable UI components
-    ├── lib/              # Utilities and helpers
-    │   └── hooks/        # Shared hooks
-    ├── api/              # API client and requests
-    ├── domain/           # Business logic and entities
-    └── infrastructure/   # External services
-        └── theme/        # Theme configuration
+
+features/
+├── auth/               # Auth feature
+│   ├── presentation/   # Auth presentation
+│   │   ├── components/    # Auth components
+│   │   ├── hooks/        # Auth hooks
+│   │   └── store/        # Auth state management
+│   └── domain/         # Auth domain
+│       ├── entities/    # Auth entities
+│       ├── repositories/ # Auth repositories
+│       ├── services/    # Auth services
+│       └── useCases/    # Auth use cases
+│   └── infrastructure/ # Auth infrastructure
+│       ├── datasources/  # Auth datasources
+│       ├── gateways/     # Auth gateways
+│       └── services/     # Auth services
+
+├── dashboard/         # Dashboard feature
+│   ├── presentation/   # Dashboard presentation
+│   │   ├── components/    # Dashboard components
+│   │   ├── hooks/        # Dashboard hooks
+│   │   └── store/        # Dashboard state management
+│   └── domain/         # Dashboard domain
+│       ├── entities/    # Dashboard entities
+│       ├── repositories/ # Dashboard repositories
+│       ├── services/    # Dashboard services
+│       └── useCases/    # Dashboard use cases
+│   └── infrastructure/ # Dashboard infrastructure
+│       ├── datasources/  # Dashboard datasources
+│       ├── gateways/     # Dashboard gateways
+│       └── services/     # Dashboard services
 ```
 
 ## Getting Started

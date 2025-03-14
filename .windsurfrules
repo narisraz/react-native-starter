@@ -6,38 +6,28 @@
       "type": "directory_structure",
       "patterns": [
         {
-          "path": "src/app/**",
+          "path": "app/**",
           "description": "Top-level application layer. Contains navigation, providers, and high-level state management.",
           "required": true
         },
         {
-          "path": "src/features/**",
-          "description": "Feature-based structure. Each feature has its own components, hooks, services, and stores.",
+          "path": "features/**",
+          "description": "Feature-based structure. Each feature has its domain, presentation and infrastructure.",
           "required": true
         },
         {
-          "path": "src/shared/ui/**",
+          "path": "features/shared/ui/**",
           "description": "Reusable UI components (buttons, modals, etc.).",
           "required": true
         },
         {
-          "path": "src/shared/lib/**",
+          "path": "features/shared/lib/**",
           "description": "Shared utilities and helper functions.",
           "required": true
         },
         {
-          "path": "src/shared/api/**",
-          "description": "API client and network requests.",
-          "required": true
-        },
-        {
-          "path": "src/shared/domain/**",
+          "path": "features/shared/domain/**",
           "description": "Domain entities, business logic, and domain-specific rules.",
-          "required": true
-        },
-        {
-          "path": "src/shared/infrastructure/**",
-          "description": "Infrastructure layer for external services and database interactions.",
           "required": true
         }
       ]
