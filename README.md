@@ -229,3 +229,4 @@ The application UI is based on the [Bandeja Connect Figma Design](https://www.fi
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+# bandeja-connect
