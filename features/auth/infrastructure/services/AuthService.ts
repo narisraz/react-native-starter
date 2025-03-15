@@ -1,7 +1,12 @@
-import { supabase } from '@/features/shared/infrastructure/services/supabase/SupabaseClient';
-import { AuthCredentials, AuthResponse, AuthUser, IAuthService } from '@/features/auth/domain/types/auth.types';
+import { AuthCredentials, AuthResponse, AuthStateChangeCallback, AuthUser, IAuthService } from '@/features/auth/domain/types/auth.types';
+import { ISupabaseAuthService, SupabaseAuthService } from '@/features/shared/infrastructure/services/supabase/SupabaseAuthService';
 
 export class AuthService implements IAuthService {
+  private authService: ISupabaseAuthService;
+
+  constructor() {
+    this.authService = new SupabaseAuthService();
+  }
   private mapSupabaseUser(user: any): AuthUser {
     return {
       id: user.id,
@@ -14,10 +19,7 @@ export class AuthService implements IAuthService {
   }
 
   async login({ email, password }: AuthCredentials): Promise<AuthResponse> {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await this.authService.signInWithPassword(email, password);
 
     if (error) throw error;
 
@@ -28,15 +30,7 @@ export class AuthService implements IAuthService {
   }
 
   async register({ email, password, displayName }: AuthCredentials): Promise<AuthResponse> {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          name: displayName,
-        },
-      },
-    });
+    const { data, error } = await this.authService.signUp(email, password, { name: displayName });
 
     if (error) throw error;
 
@@ -47,7 +41,7 @@ export class AuthService implements IAuthService {
   }
 
   async getCurrentUser(): Promise<AuthUser | null> {
-    const { data: { user }, error } = await supabase.auth.getUser();
+    const { data: { user }, error } = await this.authService.getUser();
 
     if (error || !user) return null;
 
@@ -55,27 +49,25 @@ export class AuthService implements IAuthService {
   }
 
   async logout(): Promise<void> {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await this.authService.signOut();
     if (error) throw error;
   }
 
   async resetPassword(email: string): Promise<void> {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
+    const { error } = await this.authService.resetPasswordForEmail(email, `${window.location.origin}/reset-password`);
     if (error) throw error;
   }
 
   async updateUser(updates: Partial<AuthUser>): Promise<AuthUser> {
-    const { data: { user }, error } = await supabase.auth.updateUser({
-      data: {
-        name: updates.displayName,
-      },
-    });
+    const { data: { user }, error } = await this.authService.updateUser({ name: updates.displayName });
 
     if (error || !user) throw error;
 
     return this.mapSupabaseUser(user);
+  }
+
+  onAuthStateChange(callback: AuthStateChangeCallback) {
+    return this.authService.onAuthStateChange((event) => callback(event));
   }
 }
 

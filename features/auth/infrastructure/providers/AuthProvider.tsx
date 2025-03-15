@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { router } from 'expo-router';
 import { AuthService } from '../services/AuthService';
 import { AuthUser, AuthCredentials } from '../../domain/types/auth.types';
-import { supabase } from '@/features/shared/infrastructure/services/supabase/SupabaseClient';
+
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     checkUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { subscription } = authService.onAuthStateChange(
       async (event) => {
         if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
           checkUser();

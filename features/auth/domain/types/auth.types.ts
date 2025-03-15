@@ -21,6 +21,10 @@ export interface AuthResponse {
   session: AuthSession | null;
 }
 
+export interface AuthStateChangeCallback {
+  (event: string): void;
+}
+
 export interface IAuthService {
   login(credentials: AuthCredentials): Promise<AuthResponse>;
   register(credentials: AuthCredentials): Promise<AuthResponse>;
@@ -28,4 +32,5 @@ export interface IAuthService {
   resetPassword(email: string): Promise<void>;
   getCurrentUser(): Promise<AuthUser | null>;
   updateUser(updates: Partial<AuthUser>): Promise<AuthUser>;
+  onAuthStateChange(callback: AuthStateChangeCallback): { subscription: { unsubscribe: () => void } };
 }
