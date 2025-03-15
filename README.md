@@ -1,44 +1,60 @@
-# React Native Starter with DDD Architecture 🚀
+# Bandeja Connect - Mobile Application 
 
-A production-ready React Native starter template built with Expo and Domain-Driven Design principles. This template serves as a foundation for scalable and maintainable React Native applications.
+A production-ready React Native application built with Expo and Domain-Driven Design principles. Bandeja Connect serves as a platform for connecting users with local services and businesses.
+
+## Application Overview
+
+Bandeja Connect is a mobile application designed to:
+- Connect users with local businesses and service providers
+- Provide a seamless authentication experience
+- Offer a clean, intuitive user interface
+- Support multiple languages (EN, FR)
+- Follow strict DDD architecture for maintainability and scalability
 
 ## Features
 
 ### Architecture & Design
-- 🏗️ Domain-Driven Design (DDD) architecture
-- 🧪 Clean Architecture principles
-- 💉 Dependency Injection pattern
-- 🎯 Feature-first organization
-- 🔐 Strict domain boundaries
-- 🏢 Three-layer architecture (Domain, Infrastructure, Presentation)
+- Domain-Driven Design (DDD) architecture
+- Clean Architecture principles
+- Dependency Injection pattern
+- Feature-first organization
+- Strict domain boundaries
+- Three-layer architecture (Domain, Infrastructure, Presentation)
 
 ### Core Technologies
-- 📱 [Expo](https://expo.dev) for cross-platform development
-- 🎨 [NativeBase](https://nativebase.io) UI components
-- 🔄 [Zustand](https://github.com/pmndrs/zustand) for state management
-- 🌐 [Supabase](https://supabase.io) for backend services
-- 🚦 [React Navigation](https://reactnavigation.org) with type safety
+- [Expo](https://expo.dev) for cross-platform development
+- [NativeBase](https://nativebase.io) UI components
+- [Zustand](https://github.com/pmndrs/zustand) for state management
+- [Supabase](https://supabase.io) for backend services
+- [React Navigation](https://reactnavigation.org) with type safety
 
 ### Authentication
-- 🔒 Complete auth flow (login/register)
-- 🛡️ Secure password handling
-- 🎯 Clean presenter pattern
-- ✅ Form validation
-- 🚫 Error handling
+- Complete auth flow (login/register)
+- Secure password handling
+- Clean presenter pattern
+- Form validation
+- Error handling
+
+### User Experience
+- Modern, clean UI based on Figma designs
+- Responsive layouts for various device sizes
+- Performance-optimized components
+- Support for light/dark themes
+- Intuitive search and filtering
 
 ### Internationalization
-- 🌍 Type-safe translations with i18next
-- 🔄 Automatic language detection
-- 📦 Feature-based translation organization
-- 🎯 Domain-driven translation structure
-- 🌐 Multi-language support (EN, FR)
+- Type-safe translations with i18next
+- Automatic language detection
+- Feature-based translation organization
+- Domain-driven translation structure
+- Multi-language support (EN, FR)
 
 ### Developer Experience
-- 🔍 Strict TypeScript configuration
-- ⚡ Performance optimizations
-- 🧹 Linting and formatting rules
-- 📝 Comprehensive documentation
-- 🧪 Testing setup
+- Strict TypeScript configuration
+- Performance optimizations
+- Linting and formatting rules
+- Comprehensive documentation
+- Testing setup
 
 ## Project Structure
 
@@ -72,9 +88,10 @@ features/                # Feature Modules
     ├── infrastructure/ # Shared services
     │   ├── i18n/       # Shared translations
     │   └── services/   # Core services
-    └── ui/             # Reusable UI
-        ├── components/ # UI components
-        └── hooks/     # UI hooks
+    └── presentation/   # UI components
+        ├── components/ # Reusable components
+        ├── hooks/     # UI hooks
+        └── providers/ # Context providers
 ```
 
 ### Layer Responsibilities
@@ -96,7 +113,6 @@ features/                # Feature Modules
 - State management
 - User interactions
 - Translation consumption
-```
 
 ## Getting Started
 
@@ -105,7 +121,13 @@ features/                # Feature Modules
    npm install
    ```
 
-2. Start the development server:
+2. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit the `.env` file with your Supabase credentials.
+
+3. Start the development server:
    ```bash
    npx expo start
    ```
@@ -130,7 +152,7 @@ features/                # Feature Modules
 
 1. **Naming & Structure**
    - Use PascalCase for component names
-   - Place reusable UI in `features/shared/ui`
+   - Place reusable UI in `features/shared/presentation/components`
    - Keep feature-specific components within their feature
    - Follow the established folder structure
 
@@ -149,7 +171,7 @@ features/                # Feature Modules
 ### State Management
 
 1. **Data Flow**
-   - Use Zustand/Redux for global state
+   - Use Zustand for global state
    - Keep component state minimal
    - Follow unidirectional data flow
    - Implement proper state selectors
@@ -199,18 +221,11 @@ features/                # Feature Modules
 - `npx expo start`: Start the development server
 - `npm run lint`: Run linting checks
 - `npm run test`: Run tests
-- `npm run build`: Build for production
 
-## Contributing
+## Design Resources
 
-1. Follow the established folder structure
-2. Adhere to the linting rules
-3. Write tests for new features
-4. Submit PRs with clear descriptions
+The application UI is based on the [Bandeja Connect Figma Design](https://www.figma.com/design/jOeoIbuZFt4Q8JImckuUBt/Bandeja-Connect--%3E-Application?node-id=0-1).
 
 ## License
 
-MIT
-
----
-*This README will be updated as new features are added to the starter template.*
+This project is licensed under the MIT License - see the LICENSE file for details.
