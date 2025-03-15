@@ -51,6 +51,19 @@ const shared = {
       },
       messages: {
         description: 'Chat with your partners and organize your next games.'
+      },
+      matchDetails: {
+        upcomingMatches: 'Upcoming Matches',
+        onCourt: 'On the court soon!',
+        courtType: 'Court Type',
+        level: 'Level',
+        price: 'Price',
+        perPerson: 'per person',
+        players: 'Players',
+        description: 'Description',
+        matchSheet: 'Match Sheet',
+        paymentReceipt: 'Payment Receipt',
+        additionalPurchase: 'Additional Purchase'
       }
     },
     validation: {
@@ -126,6 +139,19 @@ const shared = {
       },
       messages: {
         description: 'Discutez avec vos partenaires et organisez vos prochaines parties.'
+      },
+      matchDetails: {
+        upcomingMatches: 'Matchs à venir',
+        onCourt: 'Bientôt sur le terrain !',
+        courtType: 'Type de terrain',
+        level: 'Niveau',
+        price: 'Prix',
+        perPerson: 'par personne',
+        players: 'Joueurs',
+        description: 'Description',
+        matchSheet: 'Feuille de match',
+        paymentReceipt: 'Justificatif de paiement',
+        additionalPurchase: 'Achat additionnel'
       }
     },
     validation: {

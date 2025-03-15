@@ -17,14 +17,16 @@ import { useThemeStore } from '@/features/shared/presentation/store/useThemeStor
 import { BottomNavBar } from '@/features/shared/presentation/components/Navigation/BottomNavBar';
 import { MatchCard } from '@/features/shared/presentation/components/Cards/MatchCard';
 import { ActionCard } from '@/features/shared/presentation/components/Cards/ActionCard';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const { theme } = useThemeStore();
   const { t } = useTranslation();
+  const router = useRouter();
 
-  const handleMatchPress = useCallback(() => {
-    // Handle match press
-  }, []);
+  const handleMatchPress = useCallback((matchId: string) => {
+    router.push(`/match/${matchId}`);
+  }, [router]);
 
   const handleActionPress = useCallback(() => {
     // Handle action press
@@ -104,7 +106,7 @@ export default function HomeScreen() {
                 time={match.time}
                 date={match.date}
                 players={match.players}
-                onPress={handleMatchPress}
+                onPress={() => handleMatchPress(match.id)}
               />
             ))}
           </ScrollView>
