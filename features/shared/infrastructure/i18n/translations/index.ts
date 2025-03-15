@@ -64,6 +64,15 @@ const shared = {
         matchSheet: 'Match Sheet',
         paymentReceipt: 'Payment Receipt',
         additionalPurchase: 'Additional Purchase'
+      },
+      partnerSearch: {
+        findIdealPartner: 'Find your ideal partner!',
+        findPerfectPlayer: 'Find the PERFECT player based on your preferences.',
+        refineSearch: 'Refine your search',
+        searchPlaceholder: 'Search for a player...',
+        availability: 'Availability',
+        location: 'Location',
+        inviteToPlay: 'Invite to play'
       }
     },
     validation: {
@@ -152,6 +161,15 @@ const shared = {
         matchSheet: 'Feuille de match',
         paymentReceipt: 'Justificatif de paiement',
         additionalPurchase: 'Achat additionnel'
+      },
+      partnerSearch: {
+        findIdealPartner: 'Trouvez votre partenaire idéal !',
+        findPerfectPlayer: 'Trouvez le joueur PARFAIT 😎 selon vos préférences.',
+        refineSearch: 'Affiner votre recherche',
+        searchPlaceholder: 'Rechercher un joueur...',
+        availability: 'Disponibilité',
+        location: 'Localisation',
+        inviteToPlay: 'Inviter à jouer'
       }
     },
     validation: {

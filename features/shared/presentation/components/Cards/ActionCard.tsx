@@ -14,12 +14,13 @@ export type ActionCardProps = {
   title: string;
   description: string;
   icon: React.ReactNode;
-  onPress: () => void;
+  actionType?: string;
+  onPress: (actionType?: string) => void;
 };
 
-export const ActionCard = ({ title, description, icon, onPress }: ActionCardProps) => {
+export const ActionCard = ({ title, description, icon, actionType, onPress }: ActionCardProps) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={() => onPress(actionType)}>
       <Box 
         bg="white" 
         borderRadius="lg" 

@@ -28,9 +28,26 @@ export default function HomeScreen() {
     router.push(`/match/${matchId}`);
   }, [router]);
 
-  const handleActionPress = useCallback(() => {
-    // Handle action press
-  }, []);
+  const handleActionPress = useCallback((actionType?: string) => {
+    if (!actionType) return;
+    
+    switch(actionType) {
+      case 'findPartner':
+        router.push('/partner');
+        break;
+      case 'findMatch':
+        // Navigate to find match screen
+        break;
+      case 'favoriteClubs':
+        // Navigate to favorite clubs screen
+        break;
+      case 'friendsPartners':
+        // Navigate to friends and partners screen
+        break;
+      default:
+        break;
+    }
+  }, [router]);
 
   const upcomingMatches = [
     {
@@ -124,6 +141,7 @@ export default function HomeScreen() {
               title={t('shared.screens.home.findPartner.title')}
               description={t('shared.screens.home.findPartner.description')}
               icon={<Icon as={Ionicons} name="people" size="md" color="primary.600" />}
+              actionType="findPartner"
               onPress={handleActionPress}
             />
             
@@ -131,6 +149,7 @@ export default function HomeScreen() {
               title={t('shared.screens.home.findMatch.title')}
               description={t('shared.screens.home.findMatch.description')}
               icon={<Icon as={MaterialIcons} name="sports-tennis" size="md" color="primary.600" />}
+              actionType="findMatch"
               onPress={handleActionPress}
             />
             
@@ -138,6 +157,7 @@ export default function HomeScreen() {
               title={t('shared.screens.home.favoriteClubs.title')}
               description={t('shared.screens.home.favoriteClubs.description')}
               icon={<Icon as={Ionicons} name="heart" size="md" color="primary.600" />}
+              actionType="favoriteClubs"
               onPress={handleActionPress}
             />
             
@@ -145,6 +165,7 @@ export default function HomeScreen() {
               title={t('shared.screens.home.friendsPartners.title')}
               description={t('shared.screens.home.friendsPartners.description')}
               icon={<Icon as={Ionicons} name="people-circle" size="md" color="primary.600" />}
+              actionType="friendsPartners"
               onPress={handleActionPress}
             />
           </VStack>
