@@ -13,6 +13,45 @@ const shared = {
       back: 'Back',
       next: 'Next',
       done: 'Done',
+      greeting: 'Hello, {{name}}!',
+    },
+    navigation: {
+      home: 'Home',
+      reserve: 'Reserve',
+      match: 'Match',
+      messages: 'Messages',
+    },
+    screens: {
+      home: {
+        upcomingMatches: 'Upcoming Matches',
+        readyForNextLevel: 'Ready to level up?',
+        playConnectProgress: 'Play, connect, progress!',
+        findPartner: {
+          title: 'Find your partner',
+          description: 'Play with partners at your level and progress together!'
+        },
+        findMatch: {
+          title: 'Find a match',
+          description: 'Join available matches near you and play!'
+        },
+        favoriteClubs: {
+          title: 'Your favorite clubs',
+          description: 'Find your preferred clubs and discover new ones!'
+        },
+        friendsPartners: {
+          title: 'Your friends/partners',
+          description: 'Find your friends and partners to play whenever you want!'
+        }
+      },
+      reserve: {
+        description: 'Book your padel court and schedule your next game.'
+      },
+      match: {
+        description: 'Find matches and connect with other players in your area.'
+      },
+      messages: {
+        description: 'Chat with your partners and organize your next games.'
+      }
     },
     validation: {
       required: 'This field is required',
@@ -49,6 +88,45 @@ const shared = {
       back: 'Retour',
       next: 'Suivant',
       done: 'Terminé',
+      greeting: 'Bonjour, {{name}}!',
+    },
+    navigation: {
+      home: 'Accueil',
+      reserve: 'Réserver',
+      match: 'Match',
+      messages: 'Messages',
+    },
+    screens: {
+      home: {
+        upcomingMatches: 'Matchs à venir',
+        readyForNextLevel: 'Prêt à passer au niveau supérieur ?',
+        playConnectProgress: 'Jouez, connectez, progressez !',
+        findPartner: {
+          title: 'Trouver votre partenaire',
+          description: 'Jouez en partenaire à votre niveau et puis, jouez et progressez ensemble !'
+        },
+        findMatch: {
+          title: 'Trouver un match',
+          description: 'Rejoignez les matchs disponibles près de chez vous et jouez !'
+        },
+        favoriteClubs: {
+          title: 'Vos clubs favoris',
+          description: 'Retrouvez vos clubs préférés et appliquez d\'autres !'
+        },
+        friendsPartners: {
+          title: 'Vos amis/partenaires',
+          description: 'Retrouvez vos amis et partenaires pour jouer quand vous voulez !'
+        }
+      },
+      reserve: {
+        description: 'Réservez votre court de padel et planifiez votre prochaine partie.'
+      },
+      match: {
+        description: 'Trouvez des matchs et connectez-vous avec d\'autres joueurs dans votre région.'
+      },
+      messages: {
+        description: 'Discutez avec vos partenaires et organisez vos prochaines parties.'
+      }
     },
     validation: {
       required: 'Ce champ est requis',
