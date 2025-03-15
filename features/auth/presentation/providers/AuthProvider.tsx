@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { router } from 'expo-router';
-import { AuthService } from '../services/AuthService';
+import { AuthService } from '../../infrastructure/services/AuthService';
 import { AuthUser, AuthCredentials } from '../../domain/types/auth.types';
 
 

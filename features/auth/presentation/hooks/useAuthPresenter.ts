@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useAuth } from '../../infrastructure/providers/AuthProvider';
+import { useAuth } from '../providers/AuthProvider';
 import { useTranslation } from 'react-i18next';
 import { AuthCredentials } from '../../domain/types/auth.types';
 
